@@ -9,15 +9,12 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="keys.js"></script>
     <script>
-      // サイコロの変数（定数）
-      var dice_one=1;
-      var dice_two=2;
-      var dice_three=3;
-      var dice_four=4;
-      var dice_five=5;
-      var dice_six=6;
-      // ハンド表示用配列
-      var hand_text = ["ぐー", "ちょき", "ぱー"];
+      // じゃんけんの変数（定数）
+      var hand_gu=0;
+      var habd_choki=1;
+      var hand_pa=2;
+      // じゃんけん表示用配列
+      var dice_text = ["ぐー", "ちょき", "ぱー"];
       // 勝敗判定用変数（定数）
       var judge_win=0;
       var judge_draw=1;
@@ -93,7 +90,7 @@
         $("#result2").html("");
       }
 
-      function gameover() {
+      /*function gameover() {
         var msg = "GAME OVER<br>";
         if(win_num>0) {
           JankenScore.order(key, true).fetch()
@@ -104,7 +101,7 @@
             }
           })
           .catch(function(error){
-          });
+          });*/
 
           // スコア記録
           db = new JankenScore();
