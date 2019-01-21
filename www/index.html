@@ -17,16 +17,16 @@
       var hand_text = ["ぐー", "ちょき", "ぱー"];
       // 勝敗判定用変数（定数）
       var judge_win=0;
-      var judge_draw=1;
-      var judge_draw2=2;
+      var judge_lose=1;
+      var judge_win2=2;
       // 勝敗判定表
       var judge = [
-        [judge_win, judge_draw2, judge_draw],
-        [judge_draw2, judge_win, judge_draw],
-        [judge_draw2, judge_draw, judge_win],
+        [judge_win, judge_win2, judge_lose],
+        [judge_lose, judge_win, judge_win2],
+        [judge_win2, judge_lose, judge_win],
       ];
       // 勝敗結果表示用配列
-      var judge_text = ["ピンゾロ", "丁", "半"];
+      var judge_text = ["ゾロ目", "丁", "半"];
 
       // 連勝数記録
       var win_num = 0;
@@ -64,8 +64,11 @@
         // 勝敗ごとの処理
         if(result == judge_win) {
           win_num++;
-          $("#result2").html(win_num + "連勝!")
-        } else {
+          $("#result2").html("見事！")
+        } else if(result == judge_win2) {
+          win_num++;
+          $("result2").html("勝利！")
+        } else{
           gameover();
         }
       }
@@ -107,7 +110,7 @@
           db = new JankenScore();
           db.set(key, win_num).save();
 
-          msg += win_num +  "連勝でした。<br>";
+          msg += win_num +  "勝でした。<br>";
         } else {
           msg += "1回も勝てませんでした。<br>次は頑張ろう";
         }
