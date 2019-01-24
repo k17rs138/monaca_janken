@@ -10,12 +10,12 @@
     <script src="keys.js"></script>
     <script>
       // じゃんけんの変数（定数）
-      var number_one=1;
-      var number_two=2;
-      var number_three=3;
-      var number_four=4;
-      var number_five=5;
-      var number_six=6;
+      var number_one=0;
+      var number_two=1;
+      var number_three=2;
+      var number_four=3;
+      var number_five=4;
+      var number_six=5;
 
       // じゃんけん表示用配列
       var number_text = ["1", "2", "3", "4", "5", "6"];
@@ -51,27 +51,27 @@
       var high_score = 0;
 
       function one() {
-        janken(number_one);
+        game(number_one);
       }
 
       function two() {
-        janken(number_two);
+        game(number_two);
       }
 
       function three() {
-        janken(number_three);
+        game(number_three);
       }
 
       function four() {
-        janken(number_four);
+        game(number_four);
       }
 
       function five() {
-        janken(number_five);
+        game(number_five);
       }
 
       function six() {
-        janken(number_six);
+        game(number_six);
       }
 
       function game(player_number){
@@ -86,6 +86,7 @@
         $("#result").html(msg);
         // 勝敗ごとの処理
         if(result == judge_zoro) {
+          game_num++;
           win_num++;
           $("#result2").html("見事！")
         } else if(result == judge_tyou) {
