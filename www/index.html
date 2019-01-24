@@ -10,25 +10,35 @@
     <script src="keys.js"></script>
     <script>
       // じゃんけんの変数（定数）
-      var hand_gu=0;
-      var hand_choki=1;
-      var hand_pa=2;
+      var number_one=1;
+      var number_two=2;
+      var number_three=3;
+      var number_four=4;
+      var number_five=5;
+      var number_six=6;
+
       // じゃんけん表示用配列
-      var hand_text = ["ぐー", "ちょき", "ぱー"];
+      var number_text = ["1", "2", "3", "4", "5", "6"];
       // 勝敗判定用変数（定数）
-      var judge_win=0;
-      var judge_lose=1;
-      var judge_win2=2;
+      var judge_zoro=0;
+      var judge_tyou=1;
+      var judge_han=2;
       // 勝敗判定表
       var judge = [
-        [judge_win, judge_win2, judge_lose],
-        [judge_lose, judge_win, judge_win2],
-        [judge_win2, judge_lose, judge_win],
+        [judge_zoro, judge_tyou, judge_han, judge_tyou, judge_han, judge_tyou], 
+        [judge_tyou, judge_zoro, judge_tyou, judge_han, judge_tyou, judge_han], 
+        [judge_han, judge_tyou, judge_zoro, judge_tyou, judge_han, judge_tyou], 
+        [judge_tyou, judge_han, judge_tyou, judge_zoro, judge_tyou, judge_han], 
+        [judge_han, judge_tyou, judge_han, judge_tyou, judge_zoro, judge_tyou], 
+        [judge_tyou, judge_han, judge_tyou, judge_han, judge_tyou, judge_zoro], 
       ];
       // 勝敗結果表示用配列
-      var judge_text = ["ゾロ目", "丁", "半"];
+      var judge_text = ["ゾロ", "丁", "半"];
 
-      // あいこ数記録
+      // 勝負数
+      var game_num = 0;
+
+      // ゾロ数記録
       var win_num = 0;
 
 
@@ -40,37 +50,52 @@
       // ハイスコア
       var high_score = 0;
 
-      function gu() {
-        janken(hand_gu);
+      function one() {
+        janken(number_one);
       }
 
-      function choki() {
-        janken(hand_choki);
+      function two() {
+        janken(number_two);
       }
 
-      function pa() {
-        janken(hand_pa);
+      function three() {
+        janken(number_three);
       }
 
-      function janken(player_hand){
+      function four() {
+        janken(number_four);
+      }
+
+      function five() {
+        janken(number_five);
+      }
+
+      function six() {
+        janken(number_six);
+      }
+
+      function game(player_number){
         // コンピュータの手を決定
-        comp_hand = Math.floor(Math.random() * 3);
+        comp_number = Math.floor(Math.random() * 6);
         // 勝敗判定
-        result = judge[player_hand][comp_hand];
+        result = judge[player_number][comp_number];
         // 結果表示
-        msg="player:"+hand_text[player_hand]+"<br>"+
-            "comp:"+hand_text[comp_hand]+"<br>"+
+        msg="player:"+number_text[player_number]+"<br>"+
+            "comp:"+number_text[comp_number]+"<br>"+
             "結果:" + judge_text[result];
         $("#result").html(msg);
         // 勝敗ごとの処理
-        if(result == judge_win) {
+        if(result == judge_zoro) {
           win_num++;
           $("#result2").html("見事！")
-        } else if(result == judge_win2) {
-          $("#result2").html("勝利！")
-        } else{
-          gameover();
+        } else if(result == judge_tyou) {
+          game_num++;
+          $("#result2").html("丁！")
+        } else if(result == judge_han) {
+          game_num++;
+          $("#result2").html("半！")
         }
+     
       }
 
       function newgame() {
@@ -86,10 +111,10 @@
   
         win_num = 0;
         // ハンドボタン表示
-        $(".hand").css("display", "inline");
+        $(".number").css("display", "inline");
         // ニューゲームボタン非表示
         $("#newgame").css("display", "none");
-        $("#result").html("さぁ、張った！張った！")
+        $("#result").html("さぁ、どうなる？")
         $("#result2").html("");
       }
 
@@ -116,7 +141,7 @@
         }
         $("#result2").html(msg);
         // ハンドボタン非表示
-        $(".hand").css("display", "none");
+        $(".number").css("display", "none");
         // ニューゲームボタン表示
         $("#newgame").css("display", "inline");
       }
@@ -131,9 +156,12 @@
   <h1 class="text-white bg-primary">ゾロ目チャレンジ！</h1>
   <div id="highscore" class="text-white bg-secondary"></div>
   <div class="mx-auto" style="width: 200px">
-    <a onclick="gu();" class="btn btn-outline-primary hand" role="button">ぐー</a>
-    <a onclick="choki();" class="btn btn-outline-primary hand" role="button">ちょき</a>
-    <a onclick="pa();" class="btn btn-outline-primary hand" role="button">ぱー</a>
+    <a onclick="one();" class="btn btn-outline-primary number" role="button">1</a>
+    <a onclick="two();" class="btn btn-outline-primary number" role="button">2</a>
+    <a onclick="three();" class="btn btn-outline-primary number" role="button">3</a>
+    <a onclick="four();" class="btn btn-outline-primary number" role="button">4</a>
+    <a onclick="five();" class="btn btn-outline-primary number" role="button">5</a>
+    <a onclick="six();" class="btn btn-outline-primary number" role="button">6</a>
     <a onclick="newgame();" class="btn btn-info text-white" id="newgame" role="button">New Game</a>
   </div>
   <div id="result" class="text-white bg-secondary">
